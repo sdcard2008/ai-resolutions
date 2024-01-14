@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Powered new year resolutions</title>
+    <link rel="stylesheet" href="static/style.css" >
+</head>
+<body>
+    <div class ='head-sec'>
+        <h1 id="heading">New Year , New Me</h1>
+        <h3 class="sub-head">Explore this AI powered tool to help you set and achieve your goals in 2024</h3>
+    </div>
+    <div class="input-area">
+        <h3 class="sub-head">Please Describe Yourself in a few words</h3>
+        <br/>
+        <br/>
+        <br>
+        <form method="post">
+            <input type="text" name="desc" id="text-inp" placeholder="Write something about yourself">
+            <br/>
+            <br/>
+            <input type="submit" value="Submit" id="submit">
+        </form>
+
+        <div id="output">
+            {% if response is mapping %}
+                <p class="intro">{{ response['intro'] }}</p>
+                {% for res in response['resolutions'] %}
+                    <p class="resolution">{{ res }}</p>
+                {% endfor %} 
+                <p id="plan">{{ response['plan'] }}</p>
+                {% if response['links']|length > 0 %}
+                    {% for link in response['links'] %}
+                        <p class="link"> <a href={{link}}>{{link}}</a> </p> 
+                    {% endfor %}
+                {% endif %} 
+            {% elif response %}
+                <p class="intro">{{ response }}</p>                
+            {% endif %}
+        </div>
+    </div>  
+    <p>Powered by gpt-3.5-turbo from openai</p>  
+</body>
+</html>
